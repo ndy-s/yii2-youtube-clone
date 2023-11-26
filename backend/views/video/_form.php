@@ -38,7 +38,6 @@ use yii\bootstrap5\ActiveForm;
             ])->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-4">
-
             <div class="ratio ratio-16x9 mb-3">
                 <video src="<?php echo $model->getVideoLink() ?>"
                        poster="<?php echo $model->getThumbnailLink() ?>"
@@ -58,7 +57,7 @@ use yii\bootstrap5\ActiveForm;
                 <?php echo $model->video_name ?>
             </div>
 
-            <?= $form->field($model, 'status')->dropDownList($model->getStatusLables()) ?>
+            <?= $form->field($model, 'status')->dropDownList($model->getStatusLabels()) ?>
         </div>
     </div>
 

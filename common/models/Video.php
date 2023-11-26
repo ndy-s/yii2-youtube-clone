@@ -94,7 +94,7 @@ class Video extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getStatusLables()
+    public function getStatusLabels()
     {
         return [
             self::STATUS_UNLISTED => 'Unlisted',
