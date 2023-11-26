@@ -10,7 +10,9 @@ use yii\bootstrap5\ActiveForm;
 
 <div class="video-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['enctype' => 'multipart/form-data']
+    ]); ?>
 
     <div class="row">
         <div class="col-sm-8">
@@ -18,9 +20,22 @@ use yii\bootstrap5\ActiveForm;
 
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
+            <div class="form-group">
+                <label><?php echo $model->getAttributeLabel('thumbnail')?></label>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="thumbnail" name="thumbnail">
+                    <label class="input-group-text" for="thumbnail">Choose file</label>
+                </div>
+            </div>
+
             <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-4">
+
+            <div class="ratio ratio-16x9 mb-3">
+                <video src="<?php echo $model->getVideoLink() ?>" controls></video>
+            </div>
+
             <div class="mb-3">
                 <div class="text-muted">Video Link</div>
                 <a href="<?php echo $model->getVideoLink() ?>">
@@ -33,7 +48,7 @@ use yii\bootstrap5\ActiveForm;
                 <?php echo $model->video_name ?>
             </div>
 
-            <?= $form->field($model, 'status')->textInput() ?>
+            <?= $form->field($model, 'status')->dropDownList($model->getStatusLables()) ?>
         </div>
     </div>
 
