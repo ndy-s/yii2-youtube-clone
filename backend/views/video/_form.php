@@ -33,7 +33,10 @@ use yii\bootstrap5\ActiveForm;
         <div class="col-sm-4">
 
             <div class="ratio ratio-16x9 mb-3">
-                <video src="<?php echo $model->getVideoLink() ?>" controls></video>
+                <video src="<?php echo $model->getVideoLink() ?>"
+                       poster="<?php echo $model->getThumbnailLink() ?>"
+                       controls
+                ></video>
             </div>
 
             <div class="mb-3">
