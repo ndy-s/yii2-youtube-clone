@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'attribute' => 'video_id',
+                'attribute' => 'title',
                 'content' => function($model) {
                     return $this->render('_video_item', ['model' => $model]);
                 }
@@ -44,11 +44,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at:datetime',
             //'created_by',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Video $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'video_id' => $model->video_id]);
                  }
             ],
+            // Another manual way to do it
+            [
+                'class' => ActionColumn::class,
+                'buttons' => [
+                    'delete' => function($url) {
+                        return Html::a('Delete', $url, [
+                            'data-method' => 'post',
+                            'data-confirm' => 'Are you sure?'
+                        ]);
+                    }
+                ]
+            ]
         ],
     ]); ?>
 

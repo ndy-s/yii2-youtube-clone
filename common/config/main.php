@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'YouTube Clone (Yii2)',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
