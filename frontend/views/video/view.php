@@ -1,6 +1,7 @@
 <?php
 /** @var $model \common\models\Video */
 
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
@@ -26,6 +27,14 @@ use yii\helpers\Url;
                     ]) ?>
                 <?php \yii\widgets\Pjax::end() ?>
             </div>
+        </div>
+        <div>
+            <p>
+                <?php echo Html::a($model->createdBy->username, [
+                    '/channel/view', 'username' => $model->createdBy->username
+                ]) ?>
+            </p>
+            <?php echo Html::encode($model->description) ?>
         </div>
     </div>
     <div class="col-sm-4">
