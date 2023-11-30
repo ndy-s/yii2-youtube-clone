@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Subscriber;
 use common\models\User;
 use common\models\Video;
+use Exception;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -68,6 +69,18 @@ class ChannelController extends Controller
             $subscriber->user_id = $userId;
             $subscriber->created_at = time();
             $subscriber->save();
+
+            \Yii::$app->mailer
+                ->compose([
+                    'html' => 'subscriber-html', 'text' => 'subscriber-text'
+                ], [
+                    'channel' => $channel,
+                    'user' => \Yii::$app->user->identity
+                ])
+                ->setFrom(\Yii::$app->params['senderEmail'])
+                ->setTo($channel->email)
+                ->setSubject('You have new subscriber')
+                ->send();
         } else {
             $subscriber->delete();
         }
