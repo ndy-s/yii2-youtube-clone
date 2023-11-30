@@ -108,6 +108,30 @@ class VideoController extends Controller
         ]);
     }
 
+    public function actionSearch($keyword)
+    {
+        $query = Video::find()
+            ->published()
+            ->latest();
+
+        if ($keyword) {
+
+            // Not secure for production (sql injection)
+            $query
+                ->byKeyword($keyword)
+                ->orderBy("MATCH(title, description, tags) AGAINST ('$keyword') DESC");
+        }
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+
+        return $this->render('search', [
+            'dataProvider' => $dataProvider
+        ]);
+
+    }
+
     /**
      * @throws NotFoundHttpException
      */
